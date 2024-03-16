@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import { Item, Order, Status } from "../../interface";
-import { OrderService } from "../../service";
-import { CustomTable, ObjectDetail } from "../../components";
 import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import { CustomTable } from "../../components";
+import { Item, Order } from "../../interface";
+import { OrderService } from "../../service";
 const initalOrder: Order = {
   address: "?",
   amount: 0,
@@ -24,9 +24,7 @@ const OrderProcessScreen: React.FC<Props> = ({ idContact }) => {
   ];
 
   const [dataItem, setDataItem] = useState<Item[]>([]);
-  const viewDetail = (id: string) => {
-    navigation.navigate(`StatusOderProcessing`, { idItem: id });
-  };
+
   const fetchData = async () => {
     const response = await OrderService.getItemOrder(idContact);
     setDataItem(response);
@@ -37,11 +35,7 @@ const OrderProcessScreen: React.FC<Props> = ({ idContact }) => {
 
   return (
     <View>
-      <CustomTable
-        columns={columnsItem}
-        data={dataItem}
-        viewDetail={viewDetail}
-      />
+      <CustomTable columns={columnsItem} data={dataItem} />
     </View>
   );
 };

@@ -80,11 +80,13 @@ const CustomTable: React.FC<CustomTableProps> = ({
               );
             case "image":
               return (
-                <View style={styles.imageContainer} key={column.id}>
-                  <Image
-                    source={{ uri: item[column.id] }}
-                    style={styles.productImage}
-                  />
+                <View style={styles.text} key={column.id}>
+                  <View style={styles.imageContainer} key={column.id}>
+                    <Image
+                      source={{ uri: item[column.id] }}
+                      style={styles.productImage}
+                    />
+                  </View>
                 </View>
               );
             default:

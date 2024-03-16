@@ -10,6 +10,7 @@ import ContactService from "./ContactService";
 import OrderProcessingService from "./OrderProcessingService";
 import AccountService from "./AccountService";
 import CartService from "./CartService";
+import ThirdService from "./ThirdService";
 export {
   AuthService,
   ProductService,
@@ -23,4 +24,5 @@ export {
   OrderProcessingService,
   AccountService,
   CartService,
+  ThirdService,
 };

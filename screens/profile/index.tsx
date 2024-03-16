@@ -14,7 +14,6 @@ const ProfileScreen = ({ navigation }) => {
   const fetchData = async () => {
     setIsLoading(true);
     const response = await AccountService.getAccounts();
-    console.log(response);
     setData(response);
     setIsLoading(false);
   };

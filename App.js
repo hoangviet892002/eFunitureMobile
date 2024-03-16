@@ -5,8 +5,11 @@ import Routes from "./app/config/routers";
 import { AuthService } from "./service";
 
 const App = () => {
-  useEffect(async () => {
-    AuthService.reNewToken();
+  useEffect(() => {
+    const fetchToken = async () => {
+      AuthService.reNewToken();
+    };
+    fetchToken();
   }, []);
   setInterval(async () => {
     await AuthService.reNewToken();

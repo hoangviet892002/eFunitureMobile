@@ -21,23 +21,19 @@ statusGraph.addEdge(1, 4);
 const ContactList = ({ navigation }) => {
   const columns = [
     { id: "title", label: "Tiêu đề ", type: "text" },
-    { id: "date", label: "Ngày tạo", type: "text" },
+    { id: "value", label: "Giá trị", type: "text" },
+    { id: "pay", label: "Trả trước", type: "text" },
     { id: "status", label: "Trạng thái", type: "select" },
   ];
   const [data, setData] = useState<Contact[]>([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectStatus, setSelectStatus] = useState(0);
 
   const fetchData = async () => {
-    const totalPages = await ContactService.getTotalPages();
-    setTotalPages(totalPages);
-    const response = await ContactService.getContactsByPage(
-      currentPage,
-      selectStatus
-    );
-    setData(response);
+    const response = await ContactService.getContactsByPage(currentPage);
+    setData(response.items);
+    setTotalPages(response.totalPagesCount);
   };
   useEffect(() => {
     fetchData();
@@ -53,15 +49,6 @@ const ContactList = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Picker
-        selectedValue={selectStatus}
-        onValueChange={(itemValue, itemIndex) => setSelectStatus(itemValue)}
-        style={{ height: 50, width: 150 }}
-      >
-        {Object.entries(statusContactListing).map(([key, value]) => (
-          <Picker.Item key={key} label={value} value={key} />
-        ))}
-      </Picker>
       <CustomTable
         columns={columns}
         data={data}

@@ -44,6 +44,7 @@ class AccountService {
         text1: "Something went wrong",
       });
     }
+    return null;
   }
   static async updateAccount(data: any) {
     const accessToken = await AsyncStorage.getItem("accessToken");

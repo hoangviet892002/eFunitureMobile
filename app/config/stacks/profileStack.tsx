@@ -11,6 +11,7 @@ import {
   StatusOrderProcessingScreen,
   Login,
   TransactionDetailScreen,
+  TopupScreen,
 } from "../../../screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useCallback, useState } from "react";
@@ -83,6 +84,11 @@ const ProfileStackNavigator = ({ navigation }) => {
             name="TransactionDetail"
             component={TransactionDetailScreen}
             options={{ title: "Transaction Detail" }}
+          />
+          <Stack.Screen
+            name="TopUp"
+            component={TopupScreen}
+            options={{ title: "Topup" }}
           />
         </>
       ) : (

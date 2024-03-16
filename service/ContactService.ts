@@ -1,8 +1,10 @@
 import axios from "axios";
 
 import { Contact, Item } from "../interface";
+import API_URL_ENV from "../app/config/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_URL = "api";
+const API_URL = API_URL_ENV + `/Contract`;
 const initialContacts: Contact[] = [
   {
     id: "231",
@@ -69,11 +71,18 @@ const initialItems: Item[] = [
 ];
 
 class ContactService {
-  static async getContactsByPage(currentPage: number, status: number) {
-    return initialContacts;
+  static async getContactsByPage(currentPage: number) {
     try {
-      const response = await axios.get(`${API_URL}/Contacts`, {});
-      if (response.data.success === true) {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      const response = await axios.get(
+        `${API_URL}/GetContractsByLoginCustomer?pageIndex=${currentPage}&pageSize=10`
+      );
+      if (response.data.isSuccess === true) {
+        response.data.data.items.map((item) => {
+          item.id = item.contractID;
+          item.status = item.statusContract;
+        });
         return response.data.data;
       } else {
         // toast.error(response.data.message);
@@ -100,7 +109,25 @@ class ContactService {
     return;
   }
   static async getContactById(idContact) {
-    return contact;
+    try {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      const response = await axios.get(
+        `${API_URL}/GetContractItem?contractId=${idContact}`
+      );
+      if (response.data.isSuccess === true) {
+        response.data.data.status = response.data.data.statusContract;
+        response.data.data.item.map((item) => {
+          item.id = item.productId;
+          item.name = item.productName;
+        });
+        return response.data.data;
+      } else {
+        // toast.error(response.data.message);
+      }
+    } catch (error) {
+      // toast.error("Something went wrong");
+    }
   }
   static async getItemContact(idContact) {
     return initialItems;
