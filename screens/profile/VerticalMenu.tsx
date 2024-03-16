@@ -19,6 +19,11 @@ const VerticalMenu = ({ navigate }) => {
       label: "Transaction",
       iconName: "cash-check",
     },
+    {
+      key: "TopUp",
+      label: "Topup",
+      iconName: "cash-plus",
+    },
     { key: "logout", label: "Logout", iconName: "logout" },
   ];
 
