@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Button, TouchableOpacity, Text } from "react-native";
-import ProfileHeader from "./ProfileHeader";
-import HorizontalMenu from "./HorizontalMenu";
-import VerticalMenu from "./VerticalMenu";
+import React, { useCallback, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { AccountService } from "../../service";
+import HorizontalMenu from "./HorizontalMenu";
+import ProfileHeader from "./ProfileHeader";
+import VerticalMenu from "./VerticalMenu";
+import { useFocusEffect } from "@react-navigation/native";
 
 const ProfileScreen = ({ navigation }) => {
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [])
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     name: "",

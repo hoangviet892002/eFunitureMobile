@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, StyleSheet, Text } from "react-native";
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { CustomDropdown, CustomTable, ObjectDetail } from "../../components";
 import { StatusGraph } from "../../helper";
 import { Item } from "../../interface";
@@ -36,13 +42,13 @@ const ContactDetail = ({ route }) => {
   statusGraph.addEdge(1, 4);
   const ContactFields = [
     { key: "customerContractName", label: "Name", type: "text" },
-    { key: "title", label: "Tiêu đề", type: "text" },
-    { key: "description", label: "Nội dung", type: "text" },
-    { key: "value", label: "Giá trị", type: "text" },
-    { key: "pay", label: "Trả trước", type: "text" },
+    { key: "title", label: "Title", type: "text" },
+    { key: "description", label: "Description", type: "text" },
+    { key: "value", label: "Value", type: "text" },
+    { key: "pay", label: "Deposit", type: "text" },
     { key: "phoneNumber", label: "Phone", type: "text" },
     { key: "email", label: "Mail", type: "text" },
-    { key: "address", label: "Địa chỉ", type: "text" },
+    { key: "address", label: "Address", type: "text" },
   ];
   const [Contact, setContact] = useState(initalContact);
   const fetchContact = async () => {
@@ -51,10 +57,10 @@ const ContactDetail = ({ route }) => {
     setDataItem(response.item);
   };
   const columnsItem = [
-    { id: "image", label: "Ảnh", type: "image" },
-    { id: "name", label: "Tên sản phẩm", type: "text" },
-    { id: "price", label: "Giá trị", type: "text" },
-    { id: "quantity", label: "Số lượng", type: "text" },
+    { id: "image", label: "Image", type: "image" },
+    { id: "name", label: "Product name", type: "text" },
+    { id: "price", label: "Price", type: "text" },
+    { id: "quantity", label: "Quantity", type: "text" },
   ];
 
   const [dataItem, setDataItem] = useState<Item[]>([]);
@@ -67,37 +73,35 @@ const ContactDetail = ({ route }) => {
   useEffect(() => {
     fetchContact();
   }, []);
-  const onUpdateStatus = (ContactID: string, newStatus: number) => {
-    ContactService.updateStatus(ContactID, newStatus);
+  const onUpdateStatus = async (ContactID: string, newStatus: number) => {
+    await ContactService.updateStatus(itemId, newStatus);
     fetchContact();
   };
   const nextStatusOptions = statusGraph
     .getNextStates(Contact.status)
     .map((status) => statusContactListing[status]);
 
+  const handlePay = async () => {
+    await ContactService.PayRemainingCostContractCustomer(itemId);
+    fetchContact();
+  };
   const renderHeader = () => {
     return (
       <View>
         <ObjectDetail fields={ContactFields} data={Contact} />
-        <CustomDropdown
-          key={Contact.id}
-          currentValue={statusContactListing[Contact.status]}
-          options={nextStatusOptions}
-          onSelect={(selectedValue) => {
-            const newStatus = parseInt(
-              Object.keys(statusContactListing).find(
-                (key) => statusContactListing[key] === selectedValue
-              ) || "0",
-              10
-            );
-            onUpdateStatus(Contact.id, newStatus);
-          }}
-        />
+
         <CustomTable columns={columnsItem} data={dataItem} />
         <View style={styles.fieldContainer}>
-          <Text style={styles.label}>Trạng thái</Text>
+          <Text style={styles.label}>Status</Text>
           <Text style={styles.value}>{Contact.statusOrderProcessing.name}</Text>
         </View>
+        {Contact.statusOrderProcessing.statusCode === 3 && (
+          <>
+            <TouchableOpacity style={styles.loginButton} onPress={handlePay}>
+              <Text style={styles.loginButtonText}>Pay Monet</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     );
   };
@@ -127,6 +131,18 @@ const styles = StyleSheet.create({
   },
   value: {
     color: "#333",
+  },
+  loginButton: {
+    backgroundColor: "#0000ff",
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    width: "100%",
+    alignItems: "center",
+  },
+  loginButtonText: {
+    color: "#fff",
+    fontSize: 18,
   },
 });
 export default ContactDetail;

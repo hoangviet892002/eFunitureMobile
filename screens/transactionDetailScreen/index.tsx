@@ -15,16 +15,16 @@ const initalTransaction = {
 const TransactionDetailScreen = ({ route }) => {
   const { itemId } = route.params;
   const transFields = [
-    { key: "type", label: "Loại Giao dịch", type: "text" },
-    { key: "from", label: "Nguồn", type: "text" },
+    { key: "type", label: "Typeh", type: "text" },
+    { key: "from", label: "From", type: "text" },
     {
       key: "to",
-      label: "Tới",
+      label: "To",
       type: "text",
     },
-    { key: "amount", label: "Giá trị", type: "text" },
-    { key: "balanceRemain", label: "Số dư", type: "text" },
-    { key: "description", label: "Nội dung", type: "text" },
+    { key: "amount", label: "Value", type: "text" },
+    { key: "balanceRemain", label: "Balance", type: "text" },
+    { key: "description", label: "Comment", type: "text" },
   ];
   const [transaction, setTransaction] = useState(initalTransaction);
   const fetchtTransaction = async () => {

@@ -24,9 +24,9 @@ const App = ({ navigation }) => {
     }, [])
   );
   const columns = [
-    { id: "staffName", label: "Tên nhân viên ", type: "text" },
-    { id: "date", label: "Ngày", type: "text" },
-    { id: "status", label: "Trạng thái", type: "select" },
+    { id: "staffName", label: "Staff name ", type: "text" },
+    { id: "date", label: "Date", type: "text" },
+    { id: "status", label: "Status", type: "select" },
   ];
   const [data, setData] = useState<Appointment[]>([]);
 

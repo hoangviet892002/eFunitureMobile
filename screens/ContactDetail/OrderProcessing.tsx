@@ -17,10 +17,10 @@ interface Props {
 const OrderProcessScreen: React.FC<Props> = ({ idContact }) => {
   const navigation = useNavigation();
   const columnsItem = [
-    { id: "image", label: "Ảnh", type: "image" },
-    { id: "name", label: "Tên sản phẩm", type: "text" },
-    { id: "price", label: "Giá trị", type: "text" },
-    { id: "quantity", label: "Số lượng", type: "text" },
+    { id: "image", label: "Image", type: "image" },
+    { id: "name", label: "Product name", type: "text" },
+    { id: "price", label: "Price", type: "text" },
+    { id: "quantity", label: "Quantity", type: "text" },
   ];
 
   const [dataItem, setDataItem] = useState<Item[]>([]);
