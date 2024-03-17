@@ -9,7 +9,7 @@ import {
 import { CustomPagination } from "../../components";
 import FilterSearchBar from "./FilterSearchBar";
 import FurnitureItem from "./FurnitureItem";
-import { CategoryService, ProductService } from "../../service";
+import { AuthService, CategoryService, ProductService } from "../../service";
 import { Category, Product } from "../../interface";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
@@ -95,10 +95,12 @@ const HomeScreen = ({ navigation }) => {
           />
         </>
       ) : (
-        <Button
-          title="Go to Appointment"
-          onPress={() => navigation.navigate("Appointment")}
-        />
+        <>
+          <Button
+            title="Go to Appointment"
+            onPress={() => navigation.navigate("Appointment")}
+          />
+        </>
       )}
 
       <FilterSearchBar

@@ -20,10 +20,10 @@ statusGraph.addEdge(1, 4);
 
 const ContactList = ({ navigation }) => {
   const columns = [
-    { id: "title", label: "Tiêu đề ", type: "text" },
-    { id: "value", label: "Giá trị", type: "text" },
-    { id: "pay", label: "Trả trước", type: "text" },
-    { id: "status", label: "Trạng thái", type: "select" },
+    { id: "title", label: "Title ", type: "text" },
+    { id: "value", label: "Value", type: "text" },
+    { id: "pay", label: "Deposit", type: "text" },
+    { id: "status", label: "Status", type: "select" },
   ];
   const [data, setData] = useState<Contact[]>([]);
 
@@ -39,8 +39,8 @@ const ContactList = ({ navigation }) => {
     fetchData();
   }, [currentPage]);
 
-  const onUpdateStatus = (id, newStatus) => {
-    ContactService.updateStatus(id, newStatus);
+  const onUpdateStatus = async (id, newStatus) => {
+    await ContactService.updateStatus(id, newStatus);
     fetchData();
   };
   const viewDetail = (id) => {

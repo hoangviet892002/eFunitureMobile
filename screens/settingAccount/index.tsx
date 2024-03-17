@@ -55,20 +55,20 @@ const SettingAccount = () => {
     setIsLoading(false);
   };
   const fields = [
-    { key: "name", label: "Tên", type: "text" },
-    { key: "dateOfBird", label: "Ngày sinh", type: "date" },
+    { key: "name", label: "Name", type: "text" },
+    { key: "dateOfBird", label: "Date of Birth", type: "date" },
     {
       key: "gender",
-      label: "Giới tính",
+      label: "Gender",
       type: "select",
       options: [
-        { label: "Nam", value: "male" },
-        { label: "Nữ", value: "female" },
-        { label: "Khác", value: "orther" },
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
+        { label: "Other", value: "orther" },
       ],
     },
-    { key: "address", label: "Địa chỉ", type: "text" },
-    { key: "phoneNumber", label: "Số điện thoại", type: "text" },
+    { key: "address", label: "Address", type: "text" },
+    { key: "phoneNumber", label: "Phone Number", type: "text" },
     { key: "email", label: "Email", type: "text" },
   ];
 
@@ -109,7 +109,7 @@ const SettingAccount = () => {
         }))}
         onChange={handleFormChange}
       />
-      <Button title="Đổi mật khẩu" onPress={handleChangePass} color="#007bff" />
+      <Button title="Change Pass" onPress={handleChangePass} color="#007bff" />
     </View>
   );
 };

@@ -14,14 +14,14 @@ const StatusOrderProcessingScreen = ({ route }) => {
   const { itemId } = route.params;
 
   const OrderFields = [
-    { key: "name", label: "Sản Phẩm", type: "text" },
+    { key: "name", label: "Product", type: "text" },
     {
       key: "price",
-      label: "Giá",
+      label: "Price",
       type: "text",
     },
-    { key: "quantity", label: "Số lượng", type: "text" },
-    { key: "image", label: "Ảnh", type: "image" },
+    { key: "quantity", label: "Quantity", type: "text" },
+    { key: "image", label: "Image", type: "image" },
   ];
   const statusMapping = {
     1: "Pending",
@@ -30,10 +30,10 @@ const StatusOrderProcessingScreen = ({ route }) => {
     4: "Cancelled",
   };
   const StatusColumns = [
-    { id: "date", label: "Thời gian", type: "text" },
+    { id: "date", label: "Date", type: "text" },
     {
       id: "status",
-      label: "Trạng thái",
+      label: "Status",
       type: "text",
       formatter: (value: number) => statusMapping[value],
     },

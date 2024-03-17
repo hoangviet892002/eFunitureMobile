@@ -20,6 +20,7 @@ const CartScreen = ({ navigation }) => {
   useFocusEffect(
     useCallback(() => {
       fetchCartItem();
+      fetchVoucher();
       fetchAccount();
     }, [])
   );
@@ -50,10 +51,9 @@ const CartScreen = ({ navigation }) => {
     fetchCartItem();
   };
   const fetchVoucher = async () => {
-    const Total = await VoucherService.getTotalPages();
-    setTotalPages(Total);
     const response = await VoucherService.getVouchersByPage(currentPage);
-    setVouchers(response);
+    setVouchers(response.items);
+    setTotalPages(response.totalPagesCount);
   };
   const fetchCartItem = async () => {
     const response = await CartItemService.getCartItem();

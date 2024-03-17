@@ -14,24 +14,24 @@ const OrderDetailScreen = ({ route }) => {
   const { itemId } = route.params;
 
   const columnsItem = [
-    { id: "image", label: "Ảnh", type: "image" },
-    { id: "name", label: "Tên sản phẩm", type: "text" },
+    { id: "image", label: "Image", type: "image" },
+    { id: "name", label: "Product name", type: "text" },
 
-    { id: "price", label: "Giá trị", type: "text" },
-    { id: "quantity", label: "Số lượng", type: "text" },
+    { id: "price", label: "Price", type: "text" },
+    { id: "quantity", label: "Quantity", type: "text" },
   ];
   const OrderFields = [
-    { key: "address", label: "Địa chỉ", type: "text" },
-    { key: "price", label: "Tổng tiền", type: "text" },
+    { key: "address", label: "Address", type: "text" },
+    { key: "price", label: "Total Value", type: "text" },
     {
       key: "status",
-      label: "Trạng thái",
+      label: "Status",
       type: "text",
       formatter: (value) => statusMapping[value],
     },
-    { key: "phoneNumber", label: "Số điện thoại", type: "text" },
+    { key: "phoneNumber", label: "Phone Number", type: "text" },
     { key: "email", label: "Email", type: "text" },
-    { key: "name", label: "tên nhận", type: "text" },
+    { key: "name", label: "Name", type: "text" },
   ];
   const statusMapping = {
     1: "Pending",

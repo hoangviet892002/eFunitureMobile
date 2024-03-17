@@ -3,6 +3,7 @@ import axios from "axios";
 import { Contact, Item } from "../interface";
 import API_URL_ENV from "../app/config/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 const API_URL = API_URL_ENV + `/Contract`;
 const initialContacts: Contact[] = [
@@ -76,7 +77,9 @@ class ContactService {
       const accessToken = await AsyncStorage.getItem("accessToken");
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       const response = await axios.get(
-        `${API_URL}/GetContractsByLoginCustomer?pageIndex=${currentPage}&pageSize=10`
+        `${API_URL}/GetContractsByLoginCustomer?pageIndex=${
+          currentPage - 1
+        }&pageSize=10`
       );
       if (response.data.isSuccess === true) {
         response.data.data.items.map((item) => {
@@ -92,21 +95,51 @@ class ContactService {
     }
   }
 
-  static async getTotalPages() {
-    return 40;
+  static async PayRemainingCostContractCustomer(contractId) {
     try {
-      const response = await axios.get(`${API_URL}/Contacts/total-pages`, {});
-      if (response.data.success === true) {
-        return response.data.data;
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      const response = await axios.put(
+        `${API_URL}/PayRemainingCostContractCustomer?contractId=${contractId}`
+      );
+      if (response.data.isSuccess === true) {
+        Toast.show({
+          type: "success",
+          text1: response.data.message,
+        });
       } else {
-        // toast.error(response.data.message);
+        Toast.show({
+          type: "error",
+          text1: response.data.message,
+        });
       }
     } catch (error) {
       //   toast.error("Something went wrong");
     }
   }
   static async updateStatus(idContact, newStatus) {
-    return;
+    console.log(idContact);
+    console.log(newStatus);
+    try {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      const response = await axios.put(
+        `${API_URL}/UpdateStatusContract?contractId=${idContact}&status=${newStatus}`
+      );
+      if (response.data.isSuccess === true) {
+        Toast.show({
+          type: "success",
+          text1: response.data.message,
+        });
+      } else {
+        Toast.show({
+          type: "error",
+          text1: response.data.message,
+        });
+      }
+    } catch (error) {
+      // toast.error("Something went wrong");
+    }
   }
   static async getContactById(idContact) {
     try {

@@ -14,16 +14,16 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 const TransactionPages = ({ navigation }) => {
   const columns = [
-    { id: "from", label: "Nguồn", type: "text" },
-    { id: "to", label: "Nhận", type: "text" },
-    { id: "amount", label: "Giá trị ", type: "text" },
+    { id: "from", label: "From", type: "text" },
+    { id: "to", label: "To", type: "text" },
+    { id: "amount", label: "Value", type: "text" },
     {
       id: "creationDate",
-      label: "Ngày",
+      label: "Date",
       type: "text",
       formatter: (value) => formatDate(value),
     },
-    { id: "balanceRemain", label: "Số dư", type: "text" },
+    { id: "balanceRemain", label: "Balance", type: "text" },
   ];
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Transaction[]>([]);
@@ -80,7 +80,7 @@ const TransactionPages = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
-        <Text>Ngày bắt đầu: {startDate.toDateString()}</Text>
+        <Text>Start Date: {startDate.toDateString()}</Text>
       </TouchableOpacity>
       {showStartDatePicker && (
         <DateTimePicker
@@ -95,7 +95,7 @@ const TransactionPages = ({ navigation }) => {
         onPress={() => setShowEndDatePicker(true)}
         style={{ marginTop: 20 }}
       >
-        <Text>Ngày kết thúc: {endDate.toDateString()}</Text>
+        <Text>End Date: {endDate.toDateString()}</Text>
       </TouchableOpacity>
       {showEndDatePicker && (
         <DateTimePicker

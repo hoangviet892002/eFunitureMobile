@@ -24,10 +24,10 @@ const statusGraph = new StatusGraph();
 statusGraph.addEdge(1, 3);
 const Orderpages = ({ navigation }) => {
   const columns = [
-    { id: "address", label: "Địa chỉ", type: "text" },
-    { id: "phoneNumber", label: "Số điện thoại", type: "text" },
-    { id: "price", label: "Tổng tiền", type: "text" },
-    { id: "status", label: "Trạng thái", type: "select" },
+    { id: "address", label: "Address", type: "text" },
+    { id: "phoneNumber", label: "Phone Number", type: "text" },
+    { id: "price", label: "Price", type: "text" },
+    { id: "status", label: "Status", type: "select" },
   ];
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

@@ -20,7 +20,7 @@ const AppointmentBookingPage = () => {
       Toast.show({
         type: "error",
         text1: "Error",
-        text2: "Vui lòng điền đầy đủ thông tin.",
+        text2: "Fill information.",
       });
       return;
     }
