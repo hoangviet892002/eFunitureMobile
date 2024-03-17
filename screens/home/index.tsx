@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
       const fetch = async () => {
         setUser(await AsyncStorage.getItem("user"));
       };
-
+      setCurrentPage(1);
       fetchProducts();
       fetchCategories();
       fetch();
@@ -99,6 +99,13 @@ const HomeScreen = ({ navigation }) => {
           <Button
             title="Go to Appointment"
             onPress={() => navigation.navigate("Appointment")}
+          />
+          <Button
+            title="Logout"
+            onPress={() => {
+              AuthService.logout();
+              navigation.navigate("Login");
+            }}
           />
         </>
       )}
